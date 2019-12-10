@@ -1,0 +1,125 @@
+<?php
+declare(strict_types=1);
+
+namespace KnotPhp\DataStore\Tools\Command;
+
+use KnotLib\DataStore\Service\Exception\StringNotFoundException;
+use KnotLib\DataStore\Exception\DatastoreException;
+use KnotLib\DataStore\Service\DataStoreComponentTrait;
+use KnotLib\DataStore\Service\DataStoreStringTrait;
+use KnotLib\DataStore\Service\Exception\ComponentImplementationException;
+use KnotLib\DataStore\Service\Exception\ComponentNotFoundException;
+use KnotLib\Kernel\FileSystem\Dir;
+use KnotLib\Service\Exception\ServiceImplementationException;
+use KnotLib\Service\Exception\ServiceNotFoundException;
+
+use KnotModule\KnotDataStoreService\KnotDataStoreServiceModule;
+
+use KnotPhp\Command\Command\CommandDescriptor;
+use KnotPhp\Command\Command\AbstractCommand;
+use KnotPhp\Command\Command\CommandInterface;
+use KnotPhp\Command\Command\ConsoleIOInterface;
+use KnotPhp\Command\Exception\CommandExecutionException;
+use KnotPhp\DataStore\Tools\Database\Driver;
+use KnotPhp\DataStore\Tools\Database\Engine\MySQL\MySQLDatabaseEngine;
+
+
+final class RepositoryCreateCommand extends AbstractCommand implements CommandInterface
+{
+    use DataStoreComponentTrait;
+    use DataStoreStringTrait;
+
+    /**
+     * @return string
+     */
+    public static function getCommandId(): string
+    {
+        return 'db:generate:repository';
+    }
+
+    public static function getDescriptor(): CommandDescriptor
+    {
+        return new CommandDescriptor([
+            'command_id' => 'db:generate:repository',
+            'aliases' => [
+                'db:gen:repos',
+            ],
+            'class_root' => dirname(__DIR__),
+            'class_name' => RepositoryCreateCommand::class,
+            'class_base' => 'Calgamo\\DataStore\\Tools\\Command\\',
+            'ordered_args' => ['table'],
+            'named_args' => [
+                '--app' => 'app',
+                '-a' => 'app',
+            ],
+            'command_help' => [
+                'calgamo db:generate:repository table [-a|--app app]',
+                'calgamo db:gen:repos table [-a|--app app]',
+            ],
+        ]);
+    }
+
+    /**
+     * Returns required modules by command
+     *
+     * @return array          list of class names(FQCN)
+     */
+    public function getRequiredModules() : array
+    {
+        return [
+            KnotDataStoreServiceModule::class,
+        ];
+    }
+
+    /**
+     * {@inheritDoc}
+     *
+     * @throws ComponentNotFoundException
+     * @throws ComponentImplementationException
+     * @throws ServiceNotFoundException
+     * @throws ServiceImplementationException
+     * @throws DatastoreException
+     * @throws StringNotFoundException
+     */
+    public function execute(array $args, ConsoleIOInterface $io): int
+    {
+        $table = $args['table'] ?? '';
+        $app = $args['app'] ?? 'MyApp';
+
+        $logger = $this->getLoggerService();
+
+        $logger->debug('args: ' . print_r($args, true));
+
+        if (empty($table)){
+            throw new CommandExecutionException($this->getCommandId(), 'Empty table is specified.');
+        }
+
+        $driver = $this->getDatabaseDriver($this->getContainer());
+        $conn = $this->getDefaultConnection($this->getContainer());
+
+        $engine = null;
+        switch($driver)
+        {
+            case Driver::MYSQL:
+                $engine = new MySQLDatabaseEngine($conn);
+                break;
+
+            case Driver::SQLITE:
+                break;
+        }
+
+        $table_describer = $engine->describeTable($table);
+
+        $path = $this->getRuntimeFileSystem()->getDirectory(Dir::SRC);
+
+        $generated_class = $engine->getRepositoryClassGenerator()->generate($table_describer, $path, $app);
+
+        $io->output('Generated repository class: ');
+        $io->output('  ' . $generated_class);
+
+        $logger->debug('Generated repository class: ' . $generated_class);
+
+        return 0;
+    }
+
+}
