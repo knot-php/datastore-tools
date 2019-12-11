@@ -1,4 +1,4 @@
-Command line tools of knot-php/datastore
+Command line tools of knot-lib/datastore
 =======================
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/knot-php/datastore-tools.svg?style=flat-square)](https://packagist.org/packages/knot-php/datastore-tools)
@@ -10,7 +10,7 @@ Command line tools of knot-php/datastore
 
 ## Description
 
-Command line tools of knot-php/datastore
+Command line tools of knot-lib/datastore
 
 ## Demo
 
