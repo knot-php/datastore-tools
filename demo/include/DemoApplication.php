@@ -6,12 +6,13 @@ namespace KnotPhp\DataStore\Tools\Demo;
 use KnotLib\Kernel\Kernel\ApplicationInterface;
 use KnotLib\Kernel\Kernel\ApplicationType;
 use KnotLib\Module\Application\SimpleApplication;
-use KnotModule\KnotConsole\KnotShellRequestModule;
-use KnotModule\KnotConsole\KnotShellResponseModule;
-use KnotModule\KnotDi\KnotDiModule;
-use KnotModule\KnotPipeline\KnotPipelineModule;
-use KnotModule\KnotService\KnotServiceModule;
-use KnotModule\Stk2kEventStream\Stk2kEventStreamModule;
+
+use KnotPhp\Module\KnotConsole\KnotShellRequestModule;
+use KnotPhp\Module\KnotConsole\KnotShellResponseModule;
+use KnotPhp\Module\KnotDi\KnotDiModule;
+use KnotPhp\Module\KnotPipeline\KnotPipelineModule;
+use KnotPhp\Module\KnotService\KnotServiceModule;
+use KnotPhp\Module\Stk2kEventStream\Stk2kEventStreamModule;
 
 final class DemoApplication extends SimpleApplication
 {
