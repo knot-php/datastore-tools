@@ -28,7 +28,7 @@ $entity_class_name = get_entity_class_name($table_name);
 ?>
 namespace <?php echo $app; ?>\<?php echo str_replace('.', '\\', $sub_namespace); ?>;
 
-use CalgamoLib\DataStore\Entity\ObjectEntity;
+use KnotLib\DataStore\Entity\ObjectEntity;
 
 class <?php echo $entity_class_name; ?> extends ObjectEntity
 {

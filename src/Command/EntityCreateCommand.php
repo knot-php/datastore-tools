@@ -13,7 +13,7 @@ use KnotLib\Kernel\FileSystem\Dir;
 use KnotLib\Service\Exception\ServiceImplementationException;
 use KnotLib\Service\Exception\ServiceNotFoundException;
 
-use KnotModule\KnotDataStoreService\KnotDataStoreServiceModule;
+use KnotPhp\Module\KnotDataStoreService\KnotDataStoreServiceModule;
 
 use KnotPhp\Command\Command\AbstractCommand;
 use KnotPhp\Command\Command\CommandInterface;

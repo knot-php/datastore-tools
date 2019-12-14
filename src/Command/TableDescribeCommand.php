@@ -10,7 +10,7 @@ use KnotLib\DataStore\Service\DataStoreStringTrait;
 use KnotLib\DataStore\Service\Exception\ComponentImplementationException;
 use KnotLib\DataStore\Service\Exception\ComponentNotFoundException;
 
-use KnotModule\KnotDataStoreService\KnotDataStoreServiceModule;
+use KnotPhp\Module\KnotDataStoreService\KnotDataStoreServiceModule;
 
 use KnotPhp\Command\Command\CommandDescriptor;
 use KnotPhp\Command\Command\AbstractCommand;

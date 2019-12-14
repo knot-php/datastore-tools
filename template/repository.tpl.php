@@ -43,9 +43,9 @@ $table_name_singular = get_table_singular_form($table_name);
 ?>
 namespace <?php echo $app; ?>\<?php echo str_replace('.', '\\', $sub_namespace); ?>;
 
-use CalgamoLib\DataStore\Repository\OneToOneRepository;
-use CalgamoLib\DataStore\StorageInterface;
-use CalgamoLib\DataStore\EntityId;
+use KnotLib\DataStore\Repository\OneToOneRepository;
+use KnotLib\DataStore\StorageInterface;
+use KnotLib\DataStore\EntityId;
 use <?php echo $app; ?>\Data\Entity\<?php echo $entity_class_name; ?>;
 use <?php echo $app; ?>\Data\TableModel\<?php echo $table_model_class_name; ?>;
 

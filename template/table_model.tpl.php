@@ -32,9 +32,9 @@ function get_table_model_class_name(string $table_name){
 ?>
 namespace <?php echo $app; ?>\<?php echo str_replace('.', '\\', $sub_namespace); ?>;
 
-use CalgamoLib\DataStore\TableModelInterface;
-use CalgamoLib\DataStore\PrimaryKeyInterface;
-use CalgamoLib\DataStore\PrimaryKey\IntegerSinglePrimaryKey;
+use KnotLib\DataStore\TableModelInterface;
+use KnotLib\DataStore\PrimaryKeyInterface;
+use KnotLib\DataStore\PrimaryKey\IntegerSinglePrimaryKey;
 
 class <?php echo get_table_model_class_name($table_desc->getTableName()); ?> implements TableModelInterface
 {
