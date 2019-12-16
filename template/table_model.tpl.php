@@ -30,6 +30,8 @@ function get_table_model_class_name(string $table_name){
     return StringUtil::pascalize($table_name) . 'TableModel';
 }
 ?>
+declare(strict_types=1);
+
 namespace <?php echo $app; ?>\<?php echo str_replace('.', '\\', $sub_namespace); ?>;
 
 use KnotLib\DataStore\TableModelInterface;

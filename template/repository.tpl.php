@@ -41,6 +41,8 @@ $table_model_class_name = get_table_model_class_name($table_name);
 $base_class_name = get_base_class_name($table_name);
 $table_name_singular = get_table_singular_form($table_name);
 ?>
+declare(strict_types=1);
+
 namespace <?php echo $app; ?>\<?php echo str_replace('.', '\\', $sub_namespace); ?>;
 
 use KnotLib\DataStore\Repository\OneToOneRepository;

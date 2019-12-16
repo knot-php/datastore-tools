@@ -26,6 +26,8 @@ function get_base_class_name(string $table_name){
 $table_name = $table_desc->getTableName();
 $entity_class_name = get_entity_class_name($table_name);
 ?>
+declare(strict_types=1);
+
 namespace <?php echo $app; ?>\<?php echo str_replace('.', '\\', $sub_namespace); ?>;
 
 use KnotLib\DataStore\Entity\ObjectEntity;
