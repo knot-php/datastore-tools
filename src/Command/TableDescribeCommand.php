@@ -6,9 +6,10 @@ namespace KnotPhp\DataStore\Tools\Command;
 use KnotLib\DataStore\Exception\DatastoreException;
 use KnotLib\DataStoreService\DataStoreComponentTrait;
 use KnotLib\DataStoreService\DataStoreStringTrait;
-use KnotLib\DataStoreService\Exception\StringNotFoundException;
-use KnotLib\DataStoreService\Exception\ComponentImplementationException;
-use KnotLib\DataStoreService\Exception\ComponentNotFoundException;
+use KnotLib\Service\Exception\ComponentNotImplementedException;
+use KnotLib\Service\Exception\StringNotFoundException;
+use KnotLib\Service\Exception\ComponentNotFoundException;
+use KnotLib\Service\Exception\StringTypeException;
 
 use KnotPhp\Module\KnotDataStoreService\KnotDataStoreServiceModule;
 
@@ -72,9 +73,10 @@ final class TableDescribeCommand extends AbstractCommand implements CommandInter
      * {@inheritDoc}
      *
      * @throws ComponentNotFoundException
-     * @throws ComponentImplementationException
+     * @throws ComponentNotImplementedException
      * @throws DatastoreException
      * @throws StringNotFoundException
+     * @throws StringTypeException
      */
     public function execute(array $args, ConsoleIOInterface $io): int
     {
@@ -87,7 +89,7 @@ final class TableDescribeCommand extends AbstractCommand implements CommandInter
         $io->output('TABLE: ' . $table);
 
         $driver = $this->getDatabaseDriver($this->getContainer());
-        $conn = $this->getDefaultConnection($this->getContainer());
+        $conn = $this->getConnection($this->getContainer());
 
         $engine = null;
         switch($driver)
