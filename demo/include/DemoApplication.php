@@ -7,8 +7,8 @@ use KnotLib\Kernel\Kernel\ApplicationInterface;
 use KnotLib\Kernel\Kernel\ApplicationType;
 use KnotLib\Module\Application\SimpleApplication;
 
-use KnotPhp\Module\KnotConsole\KnotShellRequestModule;
-use KnotPhp\Module\KnotConsole\KnotShellResponseModule;
+use KnotPhp\Module\KnotConsole\ShellRequestModule;
+use KnotPhp\Module\KnotConsole\ShellResponseModule;
 use KnotPhp\Module\KnotDi\KnotDiModule;
 use KnotPhp\Module\KnotPipeline\KnotPipelineModule;
 use KnotPhp\Module\KnotService\KnotServiceModule;
@@ -33,8 +33,8 @@ final class DemoApplication extends SimpleApplication
         //$this->requireModule(KnotLoggerModule::class);
         $this->requireModule(KnotDiModule::class);
         $this->requireModule(KnotServiceModule::class);
-        $this->requireModule(KnotShellRequestModule::class);
-        $this->requireModule(KnotShellResponseModule::class);
+        $this->requireModule(ShellRequestModule::class);
+        $this->requireModule(ShellResponseModule::class);
 
         return $this;
     }

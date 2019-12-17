@@ -3,14 +3,13 @@ declare(strict_types=1);
 
 namespace KnotPhp\DataStore\Tools\Command;
 
-use KnotLib\DataStore\Service\Exception\StringNotFoundException;
 use KnotLib\DataStore\Exception\DatastoreException;
-use KnotLib\DataStore\Service\DataStoreComponentTrait;
-use KnotLib\DataStore\Service\DataStoreStringTrait;
-use KnotLib\DataStore\Service\Exception\ComponentImplementationException;
-use KnotLib\DataStore\Service\Exception\ComponentNotFoundException;
+use KnotLib\DataStoreService\DataStoreComponentTrait;
+use KnotLib\DataStoreService\DataStoreStringTrait;
+use KnotLib\DataStoreService\Exception\StringNotFoundException;
+use KnotLib\DataStoreService\Exception\ComponentImplementationException;
+use KnotLib\DataStoreService\Exception\ComponentNotFoundException;
 use KnotLib\Kernel\FileSystem\Dir;
-use KnotLib\Service\Exception\ServiceImplementationException;
 use KnotLib\Service\Exception\ServiceNotFoundException;
 
 use KnotPhp\Module\KnotDataStoreService\KnotDataStoreServiceModule;
@@ -76,7 +75,6 @@ final class EntityCreateCommand extends AbstractCommand implements CommandInterf
      * @throws ComponentNotFoundException
      * @throws ComponentImplementationException
      * @throws ServiceNotFoundException
-     * @throws ServiceImplementationException
      * @throws DatastoreException
      * @throws StringNotFoundException
      */
