@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Database\Engine\MySQL;
+namespace KnotPhp\DataStoreTools\Engine\MySQL;
 
 use Stk2k\Util\StringUtil;
 use Stk2k\File\File;
@@ -9,13 +9,13 @@ use Stk2k\File\Exception\MakeDirectoryException;
 
 use KnotLib\Kernel\FileSystem\Dir;
 
-use KnotPhp\DataStore\Tools\FileSystem\DataStoreToolsFileSystemFactory;
-use KnotPhp\DataStore\Tools\Database\EntityClassGeneratorInterface;
-use KnotPhp\DataStore\Tools\Database\TableDescriberInterface;
+use KnotPhp\DataStoreTools\FileSystem\DataStoreToolsFileSystemFactory;
+use KnotPhp\DataStoreTools\RepositoryClassGeneratorInterface;
+use KnotPhp\DataStoreTools\TableDescriberInterface;
 
-final class MySQLEntityClassGenerator implements EntityClassGeneratorInterface
+final class MySQLRepositoryClassGenerator implements RepositoryClassGeneratorInterface
 {
-    const DEFAULT_ENTITY_SUB_NAMESPACE = 'Data.Entity';
+    const DEFAULT_REPOSITORY_SUB_NAMESPACE = 'Data.Repository';
     const DS = DIRECTORY_SEPARATOR;
 
     /**
@@ -26,26 +26,26 @@ final class MySQLEntityClassGenerator implements EntityClassGeneratorInterface
     public function generate(TableDescriberInterface $table_desc, string $path, string $app, string $sub_namespace = null): string
     {
         if (!$sub_namespace){
-            $sub_namespace = self::DEFAULT_ENTITY_SUB_NAMESPACE;
+            $sub_namespace = self::DEFAULT_REPOSITORY_SUB_NAMESPACE;
         }
         else{
             $sub_namespace = str_replace('\\', '.', $sub_namespace);
             $sub_namespace = trim($sub_namespace, '.');
         }
 
-        // determin entity class name
-        $entity_class = StringUtil::pascalize($table_desc->getTableName()) . 'Entity.php';
+        // determin repository class name
+        $repository_class = StringUtil::pascalize($table_desc->getTableName()) . 'Repository.php';
 
         // determin real path
-        $path .= self::DS . implode(self::DS, explode('.', $sub_namespace)) . self::DS . $entity_class;
+        $path .= self::DS . implode(self::DS, explode('.', $sub_namespace)) . self::DS . $repository_class;
 
         $path = str_replace('/', self::DS, $path);
 
         // make directory if not exists
         (new File($path))->getParent()->makeDirectory();
 
-        // read entity template
-        $template_file = DataStoreToolsFileSystemFactory::createFileSystem()->getFile(Dir::TEMPLATE, 'entity.tpl.php');
+        // read repository template
+        $template_file = DataStoreToolsFileSystemFactory::createFileSystem()->getFile(Dir::TEMPLATE, 'repository.tpl.php');
 
         ob_start();
         /** @noinspection PhpIncludeInspection */

@@ -1,18 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Database\Engine\MySQL;
+namespace KnotPhp\DataStoreTools\Engine\MySQL;
 
 use KnotLib\DataStore\Storage\Database\DatabaseConnection;
 use KnotLib\DataStore\Exception\DatastoreException;
 
-use KnotPhp\DataStore\Tools\Database\DatabaseEngineInterface;
-use KnotPhp\DataStore\Tools\Database\EntityClassGeneratorInterface;
-use KnotPhp\DataStore\Tools\Database\FieldDescriber;
-use KnotPhp\DataStore\Tools\Database\RepositoryClassGeneratorInterface;
-use KnotPhp\DataStore\Tools\Database\TableDescriber;
-use KnotPhp\DataStore\Tools\Database\TableDescriberInterface;
-use KnotPhp\DataStore\Tools\Database\TableModelClassGeneratorInterface;
+use KnotPhp\DataStoreTools\DatabaseEngineInterface;
+use KnotPhp\DataStoreTools\EntityClassGeneratorInterface;
+use KnotPhp\DataStoreTools\RepositoryClassGeneratorInterface;
+use KnotPhp\DataStoreTools\TableDescriberInterface;
+use KnotPhp\DataStoreTools\TableModelClassGeneratorInterface;
 
 final class MySQLDatabaseEngine implements DatabaseEngineInterface
 {
@@ -34,16 +32,16 @@ final class MySQLDatabaseEngine implements DatabaseEngineInterface
      *
      * @throws DatastoreException
      */
-    public function describeTable(string $table): TableDescriberInterface
+    public function getTableDescriber(string $table): TableDescriberInterface
     {
         $fields = $this->connection->sql('DESCRIBE ' . $table)->findAll();
 
         $field_descs = [];
         foreach($fields as $fld){
-            $field_descs[] = FieldDescriber::fromArray($fld);
+            $field_descs[] = MySQLFieldDescriber::fromArray($fld);
         }
 
-        return new TableDescriber($table, $field_descs);
+        return new MySQLTableDescriber($table, $field_descs);
     }
 
     /**

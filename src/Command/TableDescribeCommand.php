@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Command;
+namespace KnotPhp\DataStoreTools\Command;
 
 use KnotLib\DataStore\Exception\DatastoreException;
 use KnotLib\DataStoreService\DataStoreComponentTrait;
@@ -11,6 +11,7 @@ use KnotLib\Service\Exception\StringNotFoundException;
 use KnotLib\Service\Exception\ComponentNotFoundException;
 use KnotLib\Service\Exception\StringTypeException;
 
+use KnotPhp\DataStoreTools\Engine\SQLite\SQLiteDatabaseEngine;
 use KnotPhp\Module\KnotDataStoreService\KnotDataStoreServiceModule;
 
 use KnotPhp\Command\Command\CommandDescriptor;
@@ -18,9 +19,8 @@ use KnotPhp\Command\Command\AbstractCommand;
 use KnotPhp\Command\Command\CommandInterface;
 use KnotPhp\Command\Command\ConsoleIOInterface;
 use KnotPhp\Command\Exception\CommandExecutionException;
-use KnotPhp\DataStore\Tools\Database\Driver;
-use KnotPhp\DataStore\Tools\Database\Engine\MySQL\MySQLDatabaseEngine;
-use KnotPhp\DataStore\Tools\Database\FieldType;
+use KnotPhp\DataStoreTools\Driver;
+use KnotPhp\DataStoreTools\Engine\MySQL\MySQLDatabaseEngine;
 
 
 final class TableDescribeCommand extends AbstractCommand implements CommandInterface
@@ -47,7 +47,10 @@ final class TableDescribeCommand extends AbstractCommand implements CommandInter
             ],
             'class_root' => dirname(__DIR__),
             'class_name' => TableDescribeCommand::class,
-            'class_base' => 'Calgamo\\DataStore\\Tools\\Command\\',
+            'class_base' => 'Calgamo\\DataStoreTools\\Command\\',
+            'required' => [
+                KnotDataStoreServiceModule::class,
+            ],
             'ordered_args' => ['table'],
             'named_args' => [],
             'command_help' => [
@@ -55,18 +58,6 @@ final class TableDescribeCommand extends AbstractCommand implements CommandInter
                 'calgamo db:desc:table table',
             ],
         ]);
-    }
-
-    /**
-     * Returns required modules by command
-     *
-     * @return array          list of class names(FQCN)
-     */
-    public function getRequiredModules() : array
-    {
-        return [
-            KnotDataStoreServiceModule::class,
-        ];
     }
 
     /**
@@ -99,38 +90,13 @@ final class TableDescribeCommand extends AbstractCommand implements CommandInter
                 break;
 
             case Driver::SQLITE:
+                $engine = new SQLiteDatabaseEngine($conn);
                 break;
         }
 
-        $table_describer = $engine->describeTable($table);
+        $table_describer = $engine->getTableDescriber($table);
 
-        $io->output(self::SEPARATOR);
-        $io->output(str_pad('FIELD', 25) . str_pad('TYPE', 12) . str_pad('LENGTH', 8) . str_pad('NULL', 5), false);
-        $io->output(str_pad('PK', 3) . str_pad('AI', 3) . str_pad('DEFAULT', 20));
-        $io->output(self::SEPARATOR);
-
-        foreach($table_describer->getFields() as $field)
-        {
-            $field_name     = $field->getFieldName();
-            $type           = $field->getType();
-            $length         = $field->getLength() < 0 ? '-' : $field->getLength();
-            $nullable       = $field->isNullable();
-            $primary_key    = $field->isPrimaryKey();
-            $default        = $field->getDefaultValue();
-            $auto_increment = $field->isAutoIncrement();
-
-            $line = '';
-            $line .= str_pad($field_name, 25);
-            $line .= str_pad(FieldType::toString($type), 12);
-            $line .= str_pad("$length", 8);
-            $line .= str_pad($nullable ? 'O' : '-', 5);
-            $line .= str_pad($primary_key ? 'O' : '-', 3);
-            $line .= str_pad($auto_increment ? 'O' : '-', 3);
-            $line .= str_pad("[$default]", 20);
-
-            $io->output($line);
-        }
-        $io->output(self::SEPARATOR);
+        $table_describer->output($io);
 
         return 0;
     }

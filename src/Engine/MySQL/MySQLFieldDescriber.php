@@ -1,9 +1,11 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Database;
+namespace KnotPhp\DataStoreTools\Engine\MySQL;
 
-final class FieldDescriber implements FieldDescriberInterface
+use KnotPhp\DataStoreTools\FieldDescriberInterface;
+
+final class MySQLFieldDescriber implements FieldDescriberInterface
 {
     /** @var string */
     private $field_name;
@@ -67,11 +69,11 @@ final class FieldDescriber implements FieldDescriberInterface
         // type/length
         $length = -1;
         if (preg_match('/^([a-z]+)\(([0-9]+)\)$/', $type, $matches)){
-            $type = FieldType::fromString($matches[1]);
+            $type = MySQLFieldType::fromString($matches[1]);
             $length = intval($matches[2]);
         }
         else if (preg_match('/^([a-z]+)$/', $type, $matches)){
-            $type = FieldType::fromString($matches[1]);
+            $type = MySQLFieldType::fromString($matches[1]);
         }
 
         // nullable

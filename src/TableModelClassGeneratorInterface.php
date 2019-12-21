@@ -1,12 +1,12 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Database;
+namespace KnotPhp\DataStoreTools;
 
-interface EntityClassGeneratorInterface
+interface TableModelClassGeneratorInterface
 {
     /**
-     * Generate entity
+     * Generate table model
      *
      * @param TableDescriberInterface $table_desc
      * @param string $path

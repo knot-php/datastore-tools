@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Demo;
+namespace KnotPhp\DataStoreTools\Demo;
 
 use KnotLib\Kernel\Kernel\ApplicationInterface;
 use KnotLib\Kernel\Kernel\ApplicationType;
@@ -10,6 +10,7 @@ use KnotLib\Module\Application\SimpleApplication;
 use KnotPhp\Module\KnotConsole\ShellRequestModule;
 use KnotPhp\Module\KnotConsole\ShellResponseModule;
 use KnotPhp\Module\KnotDi\KnotDiModule;
+use KnotPhp\Module\KnotLogger\KnotLoggerModule;
 use KnotPhp\Module\KnotPipeline\KnotPipelineModule;
 use KnotPhp\Module\KnotService\KnotServiceModule;
 use KnotPhp\Module\Stk2kEventStream\Stk2kEventStreamModule;
@@ -30,10 +31,10 @@ final class DemoApplication extends SimpleApplication
     {
         $this->requireModule(Stk2kEventStreamModule::class);
         $this->requireModule(KnotPipelineModule::class);
-        //$this->requireModule(KnotLoggerModule::class);
+        $this->requireModule(KnotLoggerModule::class);
         $this->requireModule(KnotDiModule::class);
         $this->requireModule(KnotServiceModule::class);
-        $this->requireModule(ShellRequestModule::class);
+        //$this->requireModule(ShellRequestModule::class);
         $this->requireModule(ShellResponseModule::class);
 
         return $this;

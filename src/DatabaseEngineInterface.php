@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Database;
+namespace KnotPhp\DataStoreTools;
 
 use KnotLib\DataStore\Exception\DatastoreException;
 
@@ -16,7 +16,7 @@ interface DatabaseEngineInterface
      *
      * @throws DatastoreException
      */
-    public function describeTable(string $table) : TableDescriberInterface;
+    public function getTableDescriber(string $table) : TableDescriberInterface;
 
     /**
      * Returns table model class generator

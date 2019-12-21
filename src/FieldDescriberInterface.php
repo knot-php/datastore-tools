@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Database;
+namespace KnotPhp\DataStoreTools;
 
 interface FieldDescriberInterface
 {
@@ -18,13 +18,6 @@ interface FieldDescriberInterface
      * @return int
      */
     public function getType() : int;
-
-    /**
-     * Returns field length
-     *
-     * @return int
-     */
-    public function getLength() : int;
 
     /**
      * Returns if field can be null

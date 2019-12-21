@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Database\Engine\MySQL;
+namespace KnotPhp\DataStoreTools\Engine\SQLite;
 
 use Stk2k\Util\StringUtil;
 use Stk2k\File\File;
@@ -9,11 +9,11 @@ use Stk2k\File\Exception\MakeDirectoryException;
 
 use KnotLib\Kernel\FileSystem\Dir;
 
-use KnotPhp\DataStore\Tools\FileSystem\DataStoreToolsFileSystemFactory;
-use KnotPhp\DataStore\Tools\Database\TableDescriberInterface;
-use KnotPhp\DataStore\Tools\Database\TableModelClassGeneratorInterface;
+use KnotPhp\DataStoreTools\FileSystem\DataStoreToolsFileSystemFactory;
+use KnotPhp\DataStoreTools\TableDescriberInterface;
+use KnotPhp\DataStoreTools\TableModelClassGeneratorInterface;
 
-final class MySQLTableModelClassGenerator implements TableModelClassGeneratorInterface
+final class SQLiteTableModelClassGenerator implements TableModelClassGeneratorInterface
 {
     const DEFAULT_TABLEMODEL_SUB_NAMESPACE = 'Data.TableModel';
     const DS = DIRECTORY_SEPARATOR;

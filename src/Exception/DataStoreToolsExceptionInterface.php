@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Exception;
+namespace KnotPhp\DataStoreTools\Exception;
 
 use KnotLib\Exception\KnotPhpExceptionInterface;
 use KnotLib\Exception\Runtime\RuntimeExceptionInterface;

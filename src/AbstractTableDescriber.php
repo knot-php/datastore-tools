@@ -1,23 +1,23 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Database;
+namespace KnotPhp\DataStoreTools;
 
-use KnotPhp\DataStore\Tools\Exception\FieldNotFoundException;
+use KnotPhp\DataStoreTools\Exception\FieldNotFoundException;
 
-final class TableDescriber implements TableDescriberInterface
+abstract class AbstractTableDescriber implements TableDescriberInterface
 {
     /** @var string */
     private $table_name;
 
-    /** @var FieldDescriber[] */
+    /** @var FieldDescriberInterface[] */
     private $fields;
 
     /**
      * MySQLTableDescriber constructor.
      *
      * @param string $table_name
-     * @param FieldDescriber[] $fields
+     * @param FieldDescriberInterface[] $fields
      */
     public function __construct(string $table_name, array $fields)
     {

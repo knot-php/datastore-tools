@@ -5,9 +5,9 @@ use KnotPhp\Command\Service\CommandDescriptorService;
 use KnotPhp\Command\Service\CommandDbFileService;
 use KnotPhp\Command\Service\AliasDbFileService;
 
-use KnotPhp\DataStore\Tools\Command\Provider\DataStoreToolsCommandProvider;
+use KnotPhp\DataStoreTools\Command\Provider\DataStoreToolsCommandProvider;
 use KnotPhp\Command\Command\CommandDescriptor;
-use KnotPhp\DataStore\Tools\Demo\DemoFileSystem;
+use KnotPhp\DataStoreTools\Demo\DemoFileSystem;
 
 try{
     $fs = new DemoFileSystem(__DIR__);

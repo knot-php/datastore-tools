@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Command;
+namespace KnotPhp\DataStoreTools\Command;
 
 use KnotLib\DataStore\Exception\DatastoreException;
 use KnotLib\DataStoreService\DataStoreComponentTrait;
@@ -13,6 +13,7 @@ use KnotLib\Service\Exception\ComponentNotFoundException;
 use KnotLib\Kernel\FileSystem\Dir;
 use KnotLib\Service\Exception\ServiceNotFoundException;
 
+use KnotPhp\DataStoreTools\Engine\SQLite\SQLiteDatabaseEngine;
 use KnotPhp\Module\KnotDataStoreService\KnotDataStoreServiceModule;
 
 use KnotPhp\Command\Command\AbstractCommand;
@@ -20,8 +21,8 @@ use KnotPhp\Command\Command\CommandInterface;
 use KnotPhp\Command\Command\ConsoleIOInterface;
 use KnotPhp\Command\Command\CommandDescriptor;
 use KnotPhp\Command\Exception\CommandExecutionException;
-use KnotPhp\DataStore\Tools\Database\Driver;
-use KnotPhp\DataStore\Tools\Database\Engine\MySQL\MySQLDatabaseEngine;
+use KnotPhp\DataStoreTools\Driver;
+use KnotPhp\DataStoreTools\Engine\MySQL\MySQLDatabaseEngine;
 
 final class EntityCreateCommand extends AbstractCommand implements CommandInterface
 {
@@ -45,7 +46,10 @@ final class EntityCreateCommand extends AbstractCommand implements CommandInterf
             ],
             'class_root' => dirname(__DIR__),
             'class_name' => EntityCreateCommand::class,
-            'class_base' => 'Calgamo\\DataStore\\Tools\\Command\\',
+            'class_base' => 'Calgamo\\DataStoreTools\\Command\\',
+            'required' => [
+                KnotDataStoreServiceModule::class,
+            ],
             'ordered_args' => ['table'],
             'named_args' => [
                 '--app' => 'app',
@@ -56,18 +60,6 @@ final class EntityCreateCommand extends AbstractCommand implements CommandInterf
                 'calgamo db:gen:ent table [-a|--app app]',
             ],
         ]);
-    }
-
-    /**
-     * Returns required modules by command
-     *
-     * @return array          list of class names(FQCN)
-     */
-    public function getRequiredModules() : array
-    {
-        return [
-            KnotDataStoreServiceModule::class,
-        ];
     }
 
     /**
@@ -104,10 +96,11 @@ final class EntityCreateCommand extends AbstractCommand implements CommandInterf
                 break;
 
             case Driver::SQLITE:
+                $engine = new SQLiteDatabaseEngine($conn);
                 break;
         }
 
-        $table_describer = $engine->describeTable($table);
+        $table_describer = $engine->getTableDescriber($table);
 
         $path = $this->getRuntimeFileSystem()->getDirectory(Dir::SRC);
 

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Demo;
+namespace KnotPhp\DataStoreTools\Demo;
 
 use KnotLib\Kernel\FileSystem\FileSystemFactoryInterface;
 use KnotLib\Kernel\FileSystem\FileSystemInterface;

@@ -2,8 +2,8 @@
 require_once __DIR__. '/include/init.php';
 
 use KnotPhp\Command\Service\CommandDescriptorService;
-use KnotPhp\DataStore\Tools\Command\Provider\DataStoreToolsCommandProvider;
-use KnotPhp\DataStore\Tools\Demo\DemoFileSystem;
+use KnotPhp\DataStoreTools\Command\Provider\DataStoreToolsCommandProvider;
+use KnotPhp\DataStoreTools\Demo\DemoFileSystem;
 
 try{
     $fs = new DemoFileSystem(__DIR__);

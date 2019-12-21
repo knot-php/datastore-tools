@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Exception;
+namespace KnotPhp\DataStoreTools\Exception;
 
 use Throwable;
 

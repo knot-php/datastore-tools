@@ -1,9 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Database;
+namespace KnotPhp\DataStoreTools;
 
-use KnotPhp\DataStore\Tools\Exception\FieldNotFoundException;
+use KnotPhp\Command\Command\ConsoleIOInterface;
+use KnotPhp\DataStoreTools\Exception\FieldNotFoundException;
 
 interface TableDescriberInterface
 {
@@ -38,4 +39,13 @@ interface TableDescriberInterface
      * @throws FieldNotFoundException
      */
     public function getField(string $field) : FieldDescriberInterface;
+
+    /**
+     * Output table information to console io
+     *
+     * @param ConsoleIOInterface $io
+     *
+     * @return mixed
+     */
+    public function output(ConsoleIOInterface $io);
 }

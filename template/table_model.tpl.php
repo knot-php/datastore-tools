@@ -1,6 +1,6 @@
 <?php
 use Stk2k\Util\StringUtil;
-use KnotPhp\DataStore\Tools\Database\TableDescriberInterface;
+use KnotPhp\DataStoreTools\TableDescriberInterface;
 
 /** @var string $app */
 /** @var string $sub_namespace */

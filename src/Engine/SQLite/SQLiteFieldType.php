@@ -1,35 +1,34 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Database;
+namespace KnotPhp\DataStoreTools\Engine\SQLite;
 
-final class FieldType
+final class SQLiteFieldType
 {
+    //===============================
+    // NULL
+    //===============================
+    const NULL     = 0;
+
     //===============================
     // Integer types
     //===============================
-    const INT         = 100;
-    const LONG        = 101;
+    const INTEGER     = 100;
 
     //===============================
     // String types
     //===============================
-    const STRING      = 200;
-    const TEXT        = 201;
-    const VARCHAR     = 202;
-
-    //===============================
-    // Date types
-    //===============================
-    const DATE        = 300;
-    const DATETIME    = 301;
+    const TEXT        = 200;
 
     //===============================
     // Float types
     //===============================
-    const FLOAT       = 400;
-    const DOUBLE      = 401;
-    const REAL        = 402;
+    const REAL        = 400;
+
+    //===============================
+    // Blob
+    //===============================
+    const BLOB        = 500;
 
     /**
      * Returns field type
@@ -42,25 +41,29 @@ final class FieldType
     {
         $map = [
             //===============================
+            // NULL
+            //===============================
+            'NULL' => self::NULL,
+
+            //===============================
             // Integer types
             //===============================
-            'int' => self::INT,
+            'INTEGER' => self::INTEGER,
 
             //===============================
             // String types
             //===============================
-            'varchar' => self::VARCHAR,
-
-            //===============================
-            // Date types
-            //===============================
-            'date' => self::DATE,
-            'datetime' => self::DATETIME,
+            'TEXT' => self::TEXT,
 
             //===============================
             // Float types
             //===============================
-            'float' => self::FLOAT,
+            'REAL' => self::REAL,
+
+            //===============================
+            // Blob
+            //===============================
+            'BLOB' => self::BLOB,
         ];
         return $map[$str] ?? 0;
     }
@@ -76,25 +79,29 @@ final class FieldType
     {
         $map = [
             //===============================
+            // NULL
+            //===============================
+            self::NULL => 'NULL',
+
+            //===============================
             // Integer types
             //===============================
-            self::INT => 'int',
+            self::INTEGER => 'INTEGER',
 
             //===============================
             // String types
             //===============================
-            self::VARCHAR => 'varchar',
-
-            //===============================
-            // Date types
-            //===============================
-            self::DATE => 'date',
-            self::DATETIME => 'datetime',
+            self::TEXT => 'TEXT',
 
             //===============================
             // Float types
             //===============================
-            self::FLOAT => 'float',
+            self::REAL => 'REAL',
+
+            //===============================
+            // Blob
+            //===============================
+            self::BLOB => 'BLOB',
         ];
         return $map[$type] ?? '-';
     }

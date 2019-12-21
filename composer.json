@@ -24,13 +24,13 @@
   },
   "autoload": {
     "psr-4": {
-      "KnotPhp\\DataStore\\Tools\\": "src/"
+      "KnotPhp\\DataStoreTools\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "KnotPhp\\DataStore\\Tools\\Test\\": "test/include/",
-      "KnotPhp\\DataStore\\Tools\\Demo\\": "demo/include/"
+      "KnotPhp\\DataStoreTools\\Test\\": "test/include/",
+      "KnotPhp\\DataStoreTools\\Demo\\": "demo/include/"
     }
   }
 }

@@ -1,13 +1,13 @@
 <?php
 declare(strict_types=1);
 
-namespace KnotPhp\DataStore\Tools\Command\Provider;
+namespace KnotPhp\DataStoreTools\Command\Provider;
 
 use KnotPhp\Command\Command\CommandDescriptorProviderInterface;
-use KnotPhp\DataStore\Tools\Command\EntityCreateCommand;
-use KnotPhp\DataStore\Tools\Command\RepositoryCreateCommand;
-use KnotPhp\DataStore\Tools\Command\TableDescribeCommand;
-use KnotPhp\DataStore\Tools\Command\TableModelCreateCommand;
+use KnotPhp\DataStoreTools\Command\EntityCreateCommand;
+use KnotPhp\DataStoreTools\Command\RepositoryCreateCommand;
+use KnotPhp\DataStoreTools\Command\TableDescribeCommand;
+use KnotPhp\DataStoreTools\Command\TableModelCreateCommand;
 
 final class DataStoreToolsCommandProvider implements CommandDescriptorProviderInterface
 {
