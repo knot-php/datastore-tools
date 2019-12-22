@@ -14,6 +14,7 @@ use KnotLib\Kernel\FileSystem\Dir;
 use KnotLib\Service\Exception\ServiceNotFoundException;
 
 use KnotPhp\DataStoreTools\Engine\SQLite\SQLiteDatabaseEngine;
+use KnotPhp\DataStoreTools\Module\DataStoreToolsServiceModule;
 use KnotPhp\Module\KnotDataStoreService\KnotDataStoreServiceModule;
 
 use KnotPhp\Command\Command\CommandDescriptor;
@@ -50,6 +51,7 @@ final class TableModelCreateCommand extends AbstractCommand implements CommandIn
             'class_base' => 'Calgamo\\DataStoreTools\\Command\\',
             'required' => [
                 KnotDataStoreServiceModule::class,
+                DataStoreToolsServiceModule::class,
             ],
             'ordered_args' => ['table'],
             'named_args' => [

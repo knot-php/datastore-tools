@@ -12,6 +12,7 @@ use KnotLib\Service\Exception\ComponentNotFoundException;
 use KnotLib\Service\Exception\StringTypeException;
 
 use KnotPhp\DataStoreTools\Engine\SQLite\SQLiteDatabaseEngine;
+use KnotPhp\DataStoreTools\Module\DataStoreToolsServiceModule;
 use KnotPhp\Module\KnotDataStoreService\KnotDataStoreServiceModule;
 
 use KnotPhp\Command\Command\CommandDescriptor;
@@ -50,6 +51,7 @@ final class TableDescribeCommand extends AbstractCommand implements CommandInter
             'class_base' => 'Calgamo\\DataStoreTools\\Command\\',
             'required' => [
                 KnotDataStoreServiceModule::class,
+                DataStoreToolsServiceModule::class,
             ],
             'ordered_args' => ['table'],
             'named_args' => [],
