@@ -10,7 +10,7 @@ use Stk2k\EventStream\Event;
 use KnotLib\DataStoreService\DI;
 use KnotLib\DataStore\Constants\EventStream\Events;
 use KnotLib\DataStore\Storage\Database\Database;
-use KnotLib\DataStoreService\DataStoreComponentTrait;
+use KnotLib\DataStoreService\util\DataStoreComponentTrait;
 use KnotLib\Kernel\Exception\ModuleInstallationException;
 use KnotLib\Kernel\Kernel\ApplicationInterface;
 use KnotLib\Kernel\Module\AbstractModule;
@@ -96,7 +96,7 @@ final class DataStoreToolsServiceModule extends AbstractModule implements Module
             // components.connection.default factory
             $c->extend('component://connection:default', function($component) use($logger){
                 /** @var Database $component */
-                $component->getEventChannel()->listen(Events::STORAGE_DB_CONNECTION_OPENED,
+                $component->getEventChannel()->listen(Events::STORAGE_DB_CONNECTION_AFTER_OPEN,
                     function(Event $e) use($logger)
                     {
                         $data = $e->getPayload();
