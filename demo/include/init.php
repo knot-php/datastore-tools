@@ -6,8 +6,7 @@ $base_dir = dirname(dirname(__DIR__));
 
 require_once $base_dir . '/vendor/autoload.php';
 
-//putenv('DB_DSN=sqlite:' . "{$base_dir}/db/sqlite3.db");
-putenv('DB_DSN=sqlite:' . "C:\\Temp\\sqlite3.db");
+putenv('DB_DSN=sqlite:' . "{$base_dir}/db/sqlite3.db");
 putenv('DB_USER=');
 putenv('DB_PASS=');
 

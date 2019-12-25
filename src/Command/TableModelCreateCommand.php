@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace KnotPhp\DataStoreTools\Command;
 
 use KnotLib\DataStore\Exception\DatastoreException;
-use KnotLib\DataStoreService\DataStoreComponentTrait;
-use KnotLib\DataStoreService\DataStoreStringTrait;
+use KnotLib\DataStoreService\Util\DataStoreComponentTrait;
+use KnotLib\DataStoreService\Util\DataStoreStringTrait;
 use KnotLib\Service\Exception\ComponentNotImplementedException;
 use KnotLib\Service\Exception\StringNotFoundException;
 use KnotLib\Service\Exception\StringTypeException;
