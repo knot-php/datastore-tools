@@ -1,6 +1,11 @@
 <?php
+/** @noinspection PhpUnhandledExceptionInspection */
+declare(strict_types=1);
+
 use Stk2k\Util\StringUtil;
+
 use KnotPhp\DataStoreTools\TableDescriberInterface;
+use KnotPhp\DataStoreTools\Exception\PrimaryKeyNotFoundException;
 
 /** @var string $app */
 /** @var string $sub_namespace */
@@ -14,7 +19,7 @@ function get_primary_key(TableDescriberInterface $table_desc){
             return $field;
         }
     }
-    return null;
+    throw new PrimaryKeyNotFoundException($table_desc->getTableName());
 }
 function get_table_alias(string $table_name){
     $words = explode('_', StringUtil::snake($table_name));
