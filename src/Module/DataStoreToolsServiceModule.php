@@ -14,7 +14,7 @@ use KnotLib\DataStoreService\util\DataStoreComponentTrait;
 use KnotLib\Kernel\Exception\ModuleInstallationException;
 use KnotLib\Kernel\Kernel\ApplicationInterface;
 use KnotLib\Kernel\Module\AbstractModule;
-use KnotLib\Kernel\Module\Components;
+use KnotLib\Kernel\Module\ComponentTypes;
 use KnotLib\Kernel\Module\ModuleInterface;
 use KnotPhp\Module\KnotDataStoreService\KnotDataStoreServiceModule;
 
@@ -27,11 +27,11 @@ final class DataStoreToolsServiceModule extends AbstractModule implements Module
      *
      * @return array
      */
-    public static function requiredComponents() : array
+    public static function requiredComponentTypes() : array
     {
         return [
-            Components::EVENTSTREAM,
-            Components::DI,
+            ComponentTypes::EVENTSTREAM,
+            ComponentTypes::DI,
         ];
     }
 
@@ -40,7 +40,7 @@ final class DataStoreToolsServiceModule extends AbstractModule implements Module
      */
     public static function declareComponentType(): string
     {
-        return Components::MODULE;
+        return ComponentTypes::SERVICE;
     }
 
     /**
@@ -70,7 +70,7 @@ final class DataStoreToolsServiceModule extends AbstractModule implements Module
             $logger = $app->logger();
 
             //====================================
-            // Components
+            // ComponentTypes
             //====================================
 
             // components.database factory
