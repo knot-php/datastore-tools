@@ -13,12 +13,11 @@ use KnotLib\DataStore\Storage\Database\Database;
 use KnotLib\DataStoreService\util\DataStoreComponentTrait;
 use KnotLib\Kernel\Exception\ModuleInstallationException;
 use KnotLib\Kernel\Kernel\ApplicationInterface;
-use KnotLib\Kernel\Module\AbstractModule;
 use KnotLib\Kernel\Module\ComponentTypes;
 use KnotLib\Kernel\Module\ModuleInterface;
 use KnotPhp\Module\KnotDataStoreService\KnotDataStoreServiceModule;
 
-final class DataStoreToolsServiceModule extends AbstractModule implements ModuleInterface
+final class DataStoreToolsServiceModule implements ModuleInterface
 {
     use DataStoreComponentTrait;
 
