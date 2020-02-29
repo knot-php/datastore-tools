@@ -30,6 +30,7 @@ final class DataStoreToolsServiceModule extends AbstractModule implements Module
     public static function requiredComponents() : array
     {
         return [
+            Components::EVENTSTREAM,
             Components::DI,
         ];
     }
